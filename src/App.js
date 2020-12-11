@@ -1,23 +1,24 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import BurgerPane from './Components/BurgerPane'
+import IngredientsPane from './Components/IngredientsPane'
 import './App.css';
 
 function App() {
+  const [layers, setLayers] = useState([])
+
+  const addLayer = (layer) => {
+    const newLayers = [layer, ...layers]
+    setLayers(newLayers)
+  }
+
+  const clear = () => {
+    setLayers([])
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <IngredientsPane addLayer={addLayer}/>
+      <BurgerPane layers={layers} clear={clear}/>
     </div>
   );
 }
